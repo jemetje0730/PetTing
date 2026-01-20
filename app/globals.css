@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+/* Custom theme colors */
+@theme {
+  --color-primary-50: #fef7ee;
+  --color-primary-100: #fdedd6;
+  --color-primary-200: #fad7ac;
+  --color-primary-300: #f6ba77;
+  --color-primary-400: #f19340;
+  --color-primary-500: #ee761b;
+  --color-primary-600: #df5c11;
+  --color-primary-700: #b94410;
+  --color-primary-800: #933715;
+  --color-primary-900: #772f14;
+  --color-primary-950: #401508;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* Safe area padding for mobile */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pl-safe {
+    padding-left: env(safe-area-inset-left);
+  }
+  .pr-safe {
+    padding-right: env(safe-area-inset-right);
+  }
+}
