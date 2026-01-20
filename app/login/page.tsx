@@ -36,7 +36,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center text-xs text-gray-400 mt-8">
-          로그인 시 서비스 이용약관에 동의하게 됩니다.
+          로그인 시 서비스 이용약관에 동의하게 됩니다
         </p>
       </div>
     </main>
