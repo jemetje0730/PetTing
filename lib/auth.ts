@@ -50,8 +50,9 @@ const NaverProvider = {
 export const authConfig: NextAuthConfig = {
   providers: [KakaoProvider, NaverProvider],
   pages: {
-    signIn: '/login',
-    error: '/login',
+    signIn: '/',
+    signOut: '/signout',
+    error: '/',
   },
   callbacks: {
     async jwt({ token, user, account }) {
