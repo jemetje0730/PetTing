@@ -1,48 +1,43 @@
-import { auth } from '@/lib/auth'
-import Link from 'next/link'
+'use client'
 
-export default async function Home() {
-  const session = await auth()
+import { signIn } from 'next-auth/react'
 
+export default function LoginPage() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-b from-primary-50 to-white">
-      <div className="text-center max-w-md">
-        <h1 className="text-4xl font-bold text-primary-600 mb-2">🐕 Petting</h1>
-        <p className="text-gray-600 mb-8">반려동물을 위한 서비스</p>
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-primary-600 mb-2">🐕 Petting</h1>
+          <p className="text-gray-600">로그인</p>
+        </div>
 
-        {session ? (
-          <div className="space-y-4">
-            <div className="bg-white rounded-xl p-6 shadow-lg">
-              {session.user?.image && (
-                <img
-                  src={session.user.image}
-                  alt="프로필"
-                  className="w-20 h-20 rounded-full mx-auto mb-4"
-                />
-              )}
-              <p className="text-lg font-medium">{session.user?.name}님</p>
-              <p className="text-sm text-gray-500 mb-4">
-                {session.user?.provider === 'kakao' ? '카카오' : '네이버'}로 로그인됨
-              </p>
-              <Link
-                href="/api/auth/signout"
-                className="inline-block px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition"
-              >
-                로그아웃
-              </Link>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-4">
-            <p className="text-sm text-gray-500 mb-6">로그인하고 시작하세요</p>
-            <Link
-              href="/login"
-              className="inline-block w-full px-6 py-3 bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-600 transition"
-            >
-              로그인
-            </Link>
-          </div>
-        )}
+        <div className="space-y-3">
+          {/* 카카오 로그인 */}
+          <button
+            onClick={() => signIn('kakao', { callbackUrl: '/home' })}
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#FEE500] text-[#191919] rounded-xl font-medium hover:bg-[#FDD835] transition"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 3C6.477 3 2 6.463 2 10.691c0 2.786 1.897 5.223 4.716 6.589-.148.526-.951 3.388-1.008 3.622 0 0-.021.172.09.238.111.066.241.016.241.016.317-.044 3.678-2.406 4.266-2.827.548.08 1.113.121 1.695.121 5.523 0 10-3.463 10-7.759C22 6.463 17.523 3 12 3z"/>
+            </svg>
+            카카오로 시작하기
+          </button>
+
+          {/* 네이버 로그인 */}
+          <button
+            onClick={() => signIn('naver', { callbackUrl: '/home' })}
+            className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-[#03C75A] text-white rounded-xl font-medium hover:bg-[#02B350] transition"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16.273 12.845L7.376 0H0v24h7.727V11.155L16.624 24H24V0h-7.727v12.845z"/>
+            </svg>
+            네이버로 시작하기
+          </button>
+        </div>
+
+        <p className="text-center text-xs text-gray-400 mt-8">
+          로그인 시 서비스 이용약관에 동의하게 됩니다!
+        </p>
       </div>
     </main>
   )
